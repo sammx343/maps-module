@@ -1,0 +1,14 @@
+0@Academia@red-dot.png
+1@Deportes y Recreación@red-dot.png
+2@Laboratorios@red-dot.png
+3@Fuera del Campus@red-dot.png
+4@Entorno Caribe@red-dot.png
+6@Uninorte Verde@uninorte_verde_mapa.png
+7@Tiendas y Almacenes@tiendas_almacenes_mapa.png
+8@Parqueaderos@parqueaderos_mapa.png
+9@Salas de cómputo@salas_computo_mapa.png
+10@Restaurantes@restaurantes_mapa.png
+11@Zonas de estudio@zonas_estudio_mapa.png
+12@Historias@historias_mapa.png
+13@Salones de eventos@salones_eventos_mapa.png
+14@Infraestructura@red-dot.png

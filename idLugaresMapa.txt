@@ -1,0 +1,170 @@
+11;División de Humanidades
+12;Ingeniería Civil y Ambiental
+13;Ingeniería Eléctrica y Electrónica
+14;División de Ingenierías
+15;Escuela de Negocios
+16;Ingeniería Sistemas
+17;Ingeniería Industrial
+18;División Ciencias Básicas
+19;Ingeniería Mecánica
+20;Departamento de Lenguas
+21;Música
+25;División Ciencias de la Salud
+26;División Ciencias Jurídicas
+57;Comunicación Social y Periodismo
+59;Psicología
+60;Arquitectura, Urbanismo, Diseño
+63;Derecho y Ciencia Política
+66;Instituto de Estudios Económicos del Caribe
+70;Licenciatura Pedagogía Infantil
+71;Enfermería
+72;Medicina
+74;Matemáticas
+75;Historia y Ciencias Sociales
+76;Humanidades y Filosofía
+99;Biblioteca Karl C Parrish
+2;Coliseo Cultural y Deportivo
+86;Gimnasio
+87;Cancha de básquet
+88;Salón de danza y aeróbicos
+90;Chancha de Racquetball
+94;Cancha de tenis
+95;Cancha de microfútbol
+96;Bienestar Universitario
+97;Centro Cultural Cayena
+98;Univoluntarios
+104;Cancha de fútbol
+115;Cancha múltiple
+117;Sala No. 2 o sala de música
+123;Salón No.1
+6;Centro de integrado de materiales y manufactura
+22;Laboratorio de Automatización y Robótica
+23;Laboratorio de Aguas y Sanitarias
+41;Laboratorio de Electrónica y Comunicaciones
+44;Laboratorio de Psicología
+45;Laboratorio de Redes
+48;Laboratorio Diseño Industrial
+49;Laboratorio de Arqueología
+50;Laboratorio de Aprendizaje activo y colaborativo en ambientes digitales
+51;Laboratorios Multifuncionales para Ciencias Biológicas y Biomédicas
+61;Laboratorio de Control y Automatización
+65;Laboratorio de Enfermedades Tropicales
+67;Laboratorio de Física Calor-Ondas
+68;Laboratorio de Física Eléctrica
+73;Laboratorio de Física Mecánica
+121;Laboratorio de Fisiología e Histología
+139;Laboratorio de Fitoquímica
+140;Laboratorio de Idiomas
+141;Laboratorio de Ingeniería Industrial
+142;Laboratorio de Inmunología y Biología Molecular
+143;Laboratorio de Virología
+144;Laboratorio de Morfología
+145;Laboratorio de Licenciatura en Pedagogía Infantil
+152;Laboratorio de Relaciones Internacionales
+153;Laboratorio de Sistemas Digitales
+155;Laboratorio de Suelos
+156;Laboratorio de Comunicación Social
+162;Laboratorio de Maquinas Hidráulicas
+163;Laboratorio de Medios de Transmisión
+164;Laboratorio de Simulación de Sistemas de Potencia
+165;Laboratorio de Resistencia de Materiales
+166;Laboratorio de Microbiología
+8;Consultorio Jurídico
+106;Hospital Universidad del Norte
+107;Sede postgrado Santa Marta
+7;Sede Santa Marta
+126;Catedral de Santa Marta
+129;El Morro
+130;La Quinta de San Pedro Alejandrino
+131;Aeropuerto Ernesto Cortizzos
+132;Barranquilla de noche
+133;Atardecer en Santa Marta
+134;Rodadero
+135;Bocas de Ceniza
+136;Edificio de la Aduana
+4;Plaza edificio Postgrados
+27;Frente a la Biblioteca
+124;Al lado de Casa Blanca
+125;Jardín bloque J
+52;Graphique
+58;Sala de internet
+62;Iwana
+64;Librería Km 5
+78;Sala de simulación
+80;Mediateca
+77;Parqueadero Biblioteca – Edificio Administrativo Principal
+79;Parqueadero bloque J
+81;Parqueadero bloque C
+83;Parqueadero Coliseo
+84;Parqueadero cancha de fútbol
+85;Parqueadero Edificio de postgrados
+108;Bloque B, primer y segundo piso
+109;Sala No 1
+110;Bloque D tercer piso
+111;Biblioteca primer piso
+112;Biblioteca
+1;Café du Nord
+10;du Nord Plaza
+35;Restaurante 1966
+43;Du Nord Sushi
+47;Du Nord Express
+82;Zona de estudios - bloque A
+89;Zona de estudios – bloque B
+91;Zona de estudios – bloque D
+92;Zona de estudios – bloque F
+93;Edificio postgrado primer piso
+122;Nuestros Fundadores
+127;El visionario
+128;Siembra del árbol de la amistad
+105;Auditorio
+113;Salones primer piso del Edificio Postgrados
+114;Salón de Proyecciones
+28;Bloque E
+29;Bloque F
+31;Cooperación Internacional
+32;Dirección de Investigación, Desarrollo e Innovación
+34;Centro de Consultorías
+36;Instituto de Idiomas
+37;Edificio de Postgrados Álvaro Jaramillo
+38;Salón 13 G2
+39;Salón 12 G2
+40;Salón 11 G2
+46;Punto de la Bolsa de Valores de Colombia
+55;Centro de Desarrollo Empresarial
+56;Zeyki
+100;Centro de Producción Audiovisual (CPA)
+101;Emisora Uninorte FM Estéreo
+102;Edificio Julio Muvdi
+103;Bloque J
+137;Casa blanca
+147;Bloque A
+148;Financiamiento
+149;Gestión Humana
+150;Icetex
+151;Consultorio médico
+154;Bloque B
+157;Salón de proyecciones
+158;Dirección de Tecnologías Informática y de Comunicaciones
+159;Bloque C
+160;Bloque D
+161;Registro
+167;Edificio Multipropósito
+331;Vicerrectoría Administrativa y Financiera
+332;Dirección Administrativa de Postgrados
+333;Bienestar Organizacional
+334;Crédito Empresarial
+335;Caja
+336;Oficina de Contabilidad
+337;Dirección de Mercadeo
+338;Oficina de Viajes Corporativos
+339;Servicios Generales
+340;Archivos y Correspondencia
+341;Mantenimiento
+342;Almacén
+343;Oficina de Compras
+344;Unidades de Servicios Logística y Empresarial
+345;Auditoria
+346;Oficinas de Gestión de Calidad
+347;Oficina Jurídica
+348;Oficina de Planeación
+1001;Oficina de Egresados
