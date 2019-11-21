@@ -134,8 +134,8 @@ var myVar;
     var deferred = $.Deferred();
     map = new google.maps.Map(
     document.getElementById('map'), {
-      center: new google.maps.LatLng(11.019304, -74.850773),
-      zoom: 16,
+      center: new google.maps.LatLng(11.020673, -74.849271),
+      zoom: 20,
       maxZoom: 19,
       zoomControl: true,
       mapTypeControl: true,
@@ -159,10 +159,10 @@ var myVar;
     // //Se superpone la imagen en el mapa.
     // imagen.setMap(map);
 
-    bound2 = new google.maps.LatLng(11.016413, -74.853002);
-    bound3 = new google.maps.LatLng(11.022114, -74.844934);
+    bound2 = new google.maps.LatLng(11.016703, -74.853284);
+    bound3 = new google.maps.LatLng(11.025201, -74.843980);
     var limites_imagen2 = new google.maps.LatLngBounds(bound2, bound3);
-    var imagen = new google.maps.GroundOverlay("img/mapa_real.png", limites_imagen2,{opacity:1});
+    var imagen = new google.maps.GroundOverlay("img/map_v2.png", limites_imagen2,{opacity:1});
     //Se superpone la imagen en el mapa.
     imagen.setMap(map);
 

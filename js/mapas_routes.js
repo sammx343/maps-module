@@ -30,7 +30,7 @@ function initialize2() {
   bound2 = new google.maps.LatLng(11.016413, -74.853002);
     bound3 = new google.maps.LatLng(11.022114, -74.844934);
     var limites_imagen2 = new google.maps.LatLngBounds(bound2, bound3);
-    var imagen = new google.maps.GroundOverlay("img/mapa2.png", limites_imagen2,{opacity:1});
+    var imagen = new google.maps.GroundOverlay("img/map_v2.png", limites_imagen2,{opacity:1});
     //Se superpone la imagen en el mapa.
     imagen.setMap(map);
 <?php
