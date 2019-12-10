@@ -159,8 +159,9 @@ var myVar;
     // //Se superpone la imagen en el mapa.
     // imagen.setMap(map);
 
-    bound2 = new google.maps.LatLng(11.016703, -74.853284);
-    bound3 = new google.maps.LatLng(11.025201, -74.843980);
+    bound2 = new google.maps.LatLng(11.016700, -74.853140); //Bottom left
+    bound3 = new google.maps.LatLng(11.025050, -74.844680); //Top right
+
     var limites_imagen2 = new google.maps.LatLngBounds(bound2, bound3);
     var imagen = new google.maps.GroundOverlay("img/map_v2.png", limites_imagen2,{opacity:1});
     //Se superpone la imagen en el mapa.
