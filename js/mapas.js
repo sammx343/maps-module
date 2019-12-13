@@ -284,6 +284,8 @@ var myVar;
   };
 
   function searchMarkers(map,name){
+    console.log(map);
+    console.log(name);
     //Muestra los marcadores escogidos a travez del buscador
     for (var i = 0; i < name.length; i++) {
       j = markersList.indexOf(name[i]);

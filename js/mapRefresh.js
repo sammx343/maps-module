@@ -18,7 +18,7 @@ function uiControl(){
 		$('nav').css({"background-color":"#820000","height":"100%","left":"-150px","width":"150px"});
 		$('nav>ul>li').css("background-color","rgba(59,46,46,1)");
 		$('nav ul ul li').css({"display":"block"});
-		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0.6)","display":"block"});
+		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0.6)","display":"block", "transition": ".5s all"});
 		fadeIn();
 
 	}else{
@@ -32,7 +32,7 @@ function uiControl(){
 		$('nav>ul>li').css("background-color","rgba(59,46,46,0.4)");
 		$('nav ul ul li').css("display","none");
 		$('#map').css("left","0px");
-		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0)","display":"none","left":"0px"});
+		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0)","display":"none","left":"0px", "transition": ".5s all"});
 		$('#map').css({"width":"100%"});
 		$('#mapOverlay').css({"width":"100%"});
 	}
@@ -75,15 +75,18 @@ $('nav ul ul li').click(function(){
 	var name = $(this).attr('id');
 	var index = name.split("-")[0];
 	var icon = name.split("-")[1];
+
+
+	console.log(index, icon);
 	//Sombrea la categoría seleccionada y actualiza el vector de índices.
 	if(categoriesIndex[index] === 0){
-		$('#'+index+"-"+icon).css("background-color","#820000");
+		$(this).css("background-color","#820000");
 		categoriesIndex[index] = 1;
 		//Actualiza el mapa.
 		showMarkers(map,index);
 	//Quita la sección de la categoría.
 	}else{
-		$('#'+index+"-"+icon).css("background-color","#980000");
+		$(this).css("background-color","#980000");
 		categoriesIndex[index] = 0;
 		showMarkers(map,index);
 	}

@@ -25,6 +25,7 @@
 	?>
 	<script>
 		var numCategories = <?php echo count($categories);?>
+		
 	</script>
 	<?php
 		if(isset($_GET['id'])){
@@ -33,7 +34,7 @@
 	?>
 	<nav>
 		<ul>
-			<li>Categorías</li>
+			<li>Categorías <span class="open-categories">+</span> </li>
 				<ul>
 					<?php
 						foreach ($categories as $line) {
@@ -49,7 +50,7 @@
 	</nav>
 
 	<input id="hideKeyboard" type="text" readonly="readonly" />
-	<div id="search"><input type="text" placeholder="search"><img src="img/finder/search_btn.png" height="32px" width="32px"></div>
+	<div id="search"><input type="text" placeholder="Buscar..."><img src="img/finder/search_btn.png" height="32px" width="32px"></div>
 	<div id="loadingWrap"><div id="loading"><p>Calculando. . .</p><img src="img/loading.gif" width="50%"></div></div>
 	<div id="warning">La señal no es confiable</div>
 	<div id="clearMap">Limpiar mapa <img src="img/tipologies_over/close.png" height="16px"><img src="img/tipologies_over/default.png" height="25px"></div>

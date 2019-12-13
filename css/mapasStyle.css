@@ -31,6 +31,7 @@ nav{
 nav ul, nav ul ul{
 	margin: 0;
 	padding: 0;
+    box-shadow: black 2px 2px 5px;
 }
 
 nav>ul>li{
@@ -51,8 +52,9 @@ nav ul ul li{
 	font-size: 14px;
 	height: auto;
 	list-style: none;
-	padding: 5px 10px 5px 10px;
+    padding: 10px;
 	text-align: left;
+    transition: .5s all;
 }
 
 nav ul ul li:first-child{
@@ -77,6 +79,8 @@ nav ul ul li:first-child{
 	padding: 0 32px 0 10px;
 	text-overflow: ellipsis;
 	width: 404px;
+    outline-color: #980000;
+    outline-width: 2px;
 }
 
 #search img{
@@ -161,7 +165,8 @@ nav ul ul li:first-child{
 	position: absolute;
 	height: 100%;
     width: 100%;
-    z-index: 0;
+	z-index: 0;
+	transition: .5s all;
 }
 #loadingWrap{
 	background: rgba(0,0,0,0.8);
@@ -215,6 +220,14 @@ div button{
 	font-size: 12px;
 	text-decoration: underline;
 
+}
+
+.open-categories{
+    padding: 1px 5px;
+    background: white;
+    color: black;
+    font-weight: 800;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 700px) {
