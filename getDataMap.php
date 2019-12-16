@@ -9,19 +9,42 @@ $selectCategories = mysqli_prepare($conexion,"SELECT category_id, name, icon_url
 $selectNewCategories = mysqli_prepare($conexion,"SELECT id, name FROM categories");
 $selectPlaces = mysqli_prepare($conexion,"SELECT place_id, name, description, latitude, longitud, entry_lat, entry_long FROM places WHERE category_id = ?");
 
-$subLocations = array();
-
-$selectSubLocations = mysqli_prepare($conexion,"SELECT sublocation, longitud, latitud, location, category, category_id FROM location, sublocation, categories WHERE sublocation.location_id = location.id AND sublocation.category_id = categories.id");
-mysqli_stmt_execute($selectSubLocations);
-mysqli_stmt_store_result($selectSubLocations);
-mysqli_stmt_bind_result($selectSubLocations, $sublocation, $longitud, $latitud, $location, $category, $category_id);
-
-while ($row = mysqli_stmt_fetch($selectSubLocations)) {
-    $subLocations[] = array('sublocation'=>$sublocation,'longitud'=>$longitud,'latitud'=>$latitud,'location'=>$location,'category'=>$category,'category_id'=>$category_id);
-}
+$subLocations = getSublocations($conexion);
+$categories = getCategories($conexion);
 
 $subloc = json_encode(array("result"=>$subLocations), JSON_UNESCAPED_UNICODE);
+$categoriesJson = json_encode(array("result"=>$categories), JSON_UNESCAPED_UNICODE);
 
+function getSublocations($conexion){
+    $subLocations = array();
+
+    $selectSubLocations = mysqli_prepare($conexion, "SELECT sublocation, longitud, latitud, location, category, category_id FROM location, sublocation, categories WHERE sublocation.location_id = location.id AND sublocation.category_id = categories.id");
+    mysqli_stmt_execute($selectSubLocations);
+    mysqli_stmt_store_result($selectSubLocations);
+    mysqli_stmt_bind_result($selectSubLocations, $sublocation, $longitud, $latitud, $location, $category, $category_id);
+
+    while (mysqli_stmt_fetch($selectSubLocations)) {
+        $subLocations[] = array('sublocation'=>$sublocation,'longitud'=>$longitud,'latitud'=>$latitud,'location'=>$location,'category'=>$category,'category_id'=>$category_id);
+    }
+
+    return $subLocations;
+}
+
+function getCategories($conexion){
+    $categories = array();
+
+    $selectCategories = mysqli_prepare($conexion, "SELECT * FROM categories");
+    
+    mysqli_stmt_execute($selectCategories);
+    mysqli_stmt_store_result($selectCategories);
+    mysqli_stmt_bind_result($selectCategories, $category, $id);
+
+    while (mysqli_stmt_fetch($selectCategories)) {
+        $categories[] = array('category'=>$category,'id'=>$id);
+    }
+
+    return $categories;
+}
 
 //Lista de iconos
 /*$iconsTags = array(
@@ -57,17 +80,15 @@ $params = array(
 );*/
 
 //$response = $client->__soapCall("consultarLugaresPorCategoria", array($params));
-$categories = array();
 $matrixMarkers = array();
 $counter = 0;
 ?>
 <script>
     var subLocations = <?php echo $subloc;?>;
-    console.log(subLocations);
+    var categories = <?php echo $categoriesJson;?>;
 
     var matrixMarkers = new Array();
     var markersList = new Array();
-    var categories = new Array();
     <?php
     $numPlaces = 0;
     //$fp1 =  fopen("categories.txt","a");
@@ -78,20 +99,6 @@ $counter = 0;
     while (mysqli_stmt_fetch($selectCategories)) {
     //foreach ($response->return->categorias as $line) {
         if(strClean($category_name) != "En el Mundo" && strClean($category_name) != "Fuera del Campus" && strClean($category_name) != "Entorno Caribe"){
-            $categories[$category_id][0] = $category_id;
-            $categories[$category_id][1] = $category_name;
-            $categories[$category_id][2] = $icon_url;
-            $categories[$category_id][3] = $icon_url;
-            //fwrite($fp1,strClean($line->id)."@".strClean($line->categoria)."@".$categories[$counter][3]."\n");
-            ?>
-                var counter = <?php echo $category_id;?>;
-                categories[counter] = new Array(2);
-                categories[counter][0] = <?php echo $categories[$category_id][0];?>;
-                categories[counter][1] = "<?php echo $categories[$category_id][1];?>";
-                categories[counter][2] = "<?php echo $categories[$category_id][2];?>";
-                categories[counter][3] = "<?php echo $categories[$category_id][3];?>";
-
-            <?php
             //$request = new requestDTO($categories[$counter][2],true);
             //$responsePlaces = $client->__soapCall("consultarLugaresPorCategoria", array(array("request" => $request)));
             mysqli_stmt_bind_param($selectPlaces,'s',$category_id);
@@ -123,4 +130,6 @@ $counter = 0;
     }
     //fclose($fp);
     ?>
+    console.log(matrixMarkers);
+    console.log(markersList);
 </script>

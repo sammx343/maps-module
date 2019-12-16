@@ -24,7 +24,7 @@
 		include "getDataMap.php";
 	?>
 	<script>
-		var numCategories = <?php echo count($categories);?>
+		var numCategories = <?php echo count($subLocations);?>
 		
 	</script>
 	<?php
@@ -38,11 +38,9 @@
 				<ul>
 					<?php
 						foreach ($categories as $line) {
-              if($line[0] != "17"){
   							?>
-  								<li id="<?php echo $line[0]."-".$line[2];?>"><?php echo $line[1];?></li>
+  								<li data-category-id="<?php echo $line['id'];?>"><?php echo $line['category'];?></li>
   							<?php
-              }
 						}
 					?>
 				</ul>
