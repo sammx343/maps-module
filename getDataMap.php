@@ -135,6 +135,4 @@ $counter = 0;
     }
     //fclose($fp);
     ?>
-    console.log(matrixMarkers);
-    console.log(markersList);
 </script>

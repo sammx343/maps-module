@@ -18,6 +18,10 @@ var route4 = [];
 var routes_sec=[];
 var ruta_temp = [];
 var counterPolylines = 0;
+
+let markersCurrentlyShowed = [];
+let categoriesCurrentlyShowed = [];
+
 <?php
   $array_1 = explode(";", file_get_contents("points_main_1.txt"));
   $array_2 = explode(";", file_get_contents("points_main_2.txt"));
@@ -248,13 +252,19 @@ var myVar;
     return createMarkers.markerList;
   }
 
-  function showMarkers(map, category_id){
+  function showMarkers(map, category_id, shouldShowMarker){
 
     sublocations.forEach( (sublocation, index) => {
       if(sublocation.category_id === category_id){
         let marker = createMarkers.markerList[index];
-        marker.setMap(map);
-        LatLngList.push(marker.getPosition());
+
+        if(shouldShowMarker){
+          marker.setMap(map);
+          LatLngList.push(marker.getPosition());
+        }else{
+          marker.setMap(null);
+          LatLngList.splice(LatLngList.indexOf(marker.getPosition()),1);
+        }
       }
     });
 

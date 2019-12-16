@@ -72,11 +72,23 @@ $('#mapOverlay').click(function(){
 
 //Rutina que controla el comportamiento del mapa al seleccionar o deseleccionar una categoría.
 $('nav ul ul li').click(function(event){
-	$(event.currentTarget).css("background-color","#820000");
 	const CATEGORY_ID = $(event.currentTarget).data('category-id');
-	
-	console.log(CATEGORY_ID);
-	showMarkers(map,CATEGORY_ID);
+	let category = categories.find( category => category.id === CATEGORY_ID);
+
+	if( !category.showing || category.showing === false ){
+		category.showing = true;
+		$(event.currentTarget).css("background-color","#820000");
+		showMarkers(map, CATEGORY_ID, true);
+
+	} else {
+		category.showing = false;
+		$(event.currentTarget).css("background-color","#980000");
+		showMarkers(map, CATEGORY_ID, false);
+	}
+
+	setTimeout(function() {
+		uiControl();
+	 }, 100)
 
 	return;
 	//Sombrea la categoría seleccionada y actualiza el vector de índices.
