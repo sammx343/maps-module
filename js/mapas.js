@@ -216,9 +216,8 @@ var myVar;
   }
 
   function createMarkers(){
-    console.log(sublocations);
-    if ( !createMarkers.markersList ){
-      createMarkers.markersList = sublocations.map( (sublocation, index) => {
+    if ( !createMarkers.markerList ){
+      createMarkers.markerList = sublocations.map( (sublocation, index) => {
         let iconStr = "red-dot.png";
   
         let marker = new google.maps.Marker({
@@ -244,14 +243,24 @@ var myVar;
         bindInfoWindow(marker, map, content[0]);
         return marker;
       });
-
-      console.log(createMarkers.markersList);
     }
 
-    return createMarkers.markersList;
+    return createMarkers.markerList;
   }
 
-  function showMarkers(map,index){
+  function showMarkers(map, category_id){
+
+    sublocations.forEach( (sublocation, index) => {
+      if(sublocation.category_id === category_id){
+        let marker = createMarkers.markerList[index];
+        marker.setMap(map);
+        LatLngList.push(marker.getPosition());
+      }
+    });
+
+    adjustZoom(map);
+    return;
+
     //Rutina que dibuja los markers y añade su información respectiva.
     for (var i = markers.length -1; i>=0; i--) {
       if(matrixMarkers[i][3] == index){

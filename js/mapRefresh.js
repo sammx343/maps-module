@@ -76,7 +76,7 @@ $('nav ul ul li').click(function(event){
 	const CATEGORY_ID = $(event.currentTarget).data('category-id');
 	
 	console.log(CATEGORY_ID);
-	// showMarkers(map,index);
+	showMarkers(map,CATEGORY_ID);
 
 	return;
 	//Sombrea la categoría seleccionada y actualiza el vector de índices.
