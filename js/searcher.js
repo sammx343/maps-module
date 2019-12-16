@@ -2,6 +2,7 @@
 $('#search input').autocomplete({
 	source: markersList,
 	select: function (e, ui) {
+		console.log('clicks here');
 		var name = new Array(); 
 		name.push(ui.item.value);
 		searchMarkers(map,name);

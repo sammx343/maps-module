@@ -75,9 +75,7 @@ $('nav ul ul li').click(function(){
 	var name = $(this).attr('id');
 	var index = name.split("-")[0];
 	var icon = name.split("-")[1];
-
-
-	console.log(index, icon);
+	
 	//Sombrea la categoría seleccionada y actualiza el vector de índices.
 	if(categoriesIndex[index] === 0){
 		$(this).css("background-color","#820000");

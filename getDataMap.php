@@ -6,7 +6,23 @@ $conexion = mysqli_connect($db_host,$db_user,$db_password,$db_schema);
 $conexion -> set_charset("utf8");
 
 $selectCategories = mysqli_prepare($conexion,"SELECT category_id, name, icon_url FROM category");
+$selectNewCategories = mysqli_prepare($conexion,"SELECT id, name FROM categories");
 $selectPlaces = mysqli_prepare($conexion,"SELECT place_id, name, description, latitude, longitud, entry_lat, entry_long FROM places WHERE category_id = ?");
+
+$subLocations = array();
+
+$selectSubLocations = mysqli_prepare($conexion,"SELECT sublocation, longitud, latitud, location, category, category_id FROM location, sublocation, categories WHERE sublocation.location_id = location.id AND sublocation.category_id = categories.id");
+mysqli_stmt_execute($selectSubLocations);
+mysqli_stmt_store_result($selectSubLocations);
+mysqli_stmt_bind_result($selectSubLocations, $sublocation, $longitud, $latitud, $location, $category, $category_id);
+
+while ($row = mysqli_stmt_fetch($selectSubLocations)) {
+    $subLocations[] = array('sublocation'=>$sublocation,'longitud'=>$longitud,'latitud'=>$latitud,'location'=>$location,'category'=>$category,'category_id'=>$category_id);
+}
+
+$subloc = json_encode(array("result"=>$subLocations), JSON_UNESCAPED_UNICODE);
+
+
 //Lista de iconos
 /*$iconsTags = array(
     "HISTORIAS" => "historias_mapa.png",
@@ -46,6 +62,9 @@ $matrixMarkers = array();
 $counter = 0;
 ?>
 <script>
+    var subLocations = <?php echo $subloc;?>;
+    console.log(subLocations);
+
     var matrixMarkers = new Array();
     var markersList = new Array();
     var categories = new Array();
