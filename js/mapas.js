@@ -216,39 +216,39 @@ var myVar;
   }
 
   function createMarkers(){
-
-    for (var j = 0; j < matrixMarkers.length;  j++) {
-      //Revisa si la categoría a la cual pertenece el marker, se encuentra seleccionada.
-      var iconStr;
-      if(categories[matrixMarkers[j][3]] == undefined){
-        iconStr = "red-dot.png";
-      }else{
-        iconStr = categories[matrixMarkers[j][3]][3];
-      }
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(matrixMarkers[j][1],matrixMarkers[j][2]),
-        icon: 'img/tipologies_over/' + iconStr,
-      });
-
-      //Extrae la información respectiva del sitio.
-      var content = $("<div class='markerInfoWin'> " +
-                        "<div class='markerTitle'>"+matrixMarkers[j][0]+"</div> " +
+    console.log(sublocations);
+    if ( !createMarkers.markersList ){
+      createMarkers.markersList = sublocations.map( (sublocation, index) => {
+        let iconStr = "red-dot.png";
+  
+        let marker = new google.maps.Marker({
+          position: new google.maps.LatLng(sublocation.latitud, sublocation.longitud),
+          icon: 'img/tipologies_over/' + iconStr,
+        });
+        
+        //Añade tooltip de comentario
+        var content = $("<div class='markerInfoWin'> " +
+                        "<div class='markerTitle'>"+sublocation.sublocation+"</div> " +
                         "<div class='markerInfo'>" +
-                          "<div class='markerDescription'>"+matrixMarkers[j][4]+"</div>" +
+                          "<div class='markerDescription'>"+sublocation.location+"</div>" +
                         "</div>" +
-                        "<button class='botonRoutes' onclick='routeDraw("+j+")' >LLevame aquí!</button>" +
-                      "</div></br>");
-      infoWindow = new google.maps.InfoWindow({
-        content: '',
-        maxWidth: 200
+                        "<button class='botonRoutes' onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
+                        "</div></br>");
+  
+        infoWindow = new google.maps.InfoWindow({
+          content: '',
+          maxWidth: 200
+        });
+
+        //Bind de información del sitio
+        bindInfoWindow(marker, map, content[0]);
+        return marker;
       });
-      //Funcion que agrega la información al marker descrito.
-      bindInfoWindow(marker, map, content[0]);
-      markers.push(marker);
-      if(matrixMarkers[j][0] == "Parqueadero Bloque J"){
-        alert(iconStr);
-      }
-    };
+
+      console.log(createMarkers.markersList);
+    }
+
+    return createMarkers.markersList;
   }
 
   function showMarkers(map,index){

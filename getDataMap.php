@@ -84,8 +84,13 @@ $matrixMarkers = array();
 $counter = 0;
 ?>
 <script>
-    var subLocations = <?php echo $subloc;?>;
+    var sublocations = <?php echo $subloc;?>;
     var categories = <?php echo $categoriesJson;?>;
+
+    sublocations = sublocations.result;
+    categories = categories.result;
+    
+    console.log(sublocations);
 
     var matrixMarkers = new Array();
     var markersList = new Array();

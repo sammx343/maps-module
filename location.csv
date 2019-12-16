@@ -1,44 +1,44 @@
-﻿location;latitud;longitud;id
-Edificio Mario Santo Domingo ;11,0209010;-74,8512500;1
-Zona de Estudiantes 2;11,0206541;-74,8531796;2
-Puerta 11;11,0210230;-74,8525040;3
-Zona de Estudiantes 1;11,0186906;-74,8514316;4
-Bloque L - Edificio Julio Muvdi;11,0192460;-74,8514620;5
-Bloque C;11,0189840;-74,8509760;6
-Bloque J;11,0189100;-74,8516660;7
-Bloque B;11,0187340;-74,8509390;8
-Edificio de Ciencias de la Salud;11,0188950;-74,8519050;9
-Bloque A;11,0184380;-74,8510000;10
-Edificio Administrativo II;11,0185690;-74,8519450;11
-Laboratorio 5;11,0181320;-74,8519970;12
-Puerta 1;11,0176280;-74,8517760;13
-Edificio Administrativo I;11,0181180;-74,8511110;14
-Puerta 2;11,0174970;-74,8512080;15
-Laboratorio 1;11,0184290;-74,8507730;16
-Laboratorio 2;11,0186530;-74,8506050;17
-Laboratorio 3;11,0189140;-74,8503960;18
-Puerta 4;11,0173160;-74,8505810;19
-Casa de Estudio Alfredo Correa De Andreis;11,0176460;-74,8504350;20
-Biblioteca Karl C. Parrish Jr.;11,0176460;-74,8515408;21
-Bloque D;11,0182190;-74,8502450;22
-Bloque E;11,0184980;-74,8501750;23
-Bloque F;11,0187350;-74,8500570;24
-Du Nord Plaza;11,0187350;-74,8511513;25
-Du Nord Exprès;11,0191540;-74,8505230;26
-Puerta 7;11,0191520;-74,8496080;27
-Café du Nord;11,0194867;-74,8502795;28
-Puerta 9;11,0196220;-74,8487400;29
-Bloque M;11,0196720;-74,8482250;30
-Puerta 10              ;11,0190620;-74,8453850;31
-Laboratorio Aula Viva;11,0199150;-74,8465330;32
-Laboratorio de Arquitectura Tropical;11,0201680;-74,8464660;33
-Oficina Univoluntarios;11,0196600;-74,8465550;34
-Consejería Estudiantil - ACES;11,0196600;-74,8465550;35
-Laboratorio de Energías Renovables;11,0200520;-74,8463730;36
-Laboratorio de Petrografía;11,0199490;-74,8463110;37
-Bloque G;11,0195600;-74,8496330;38
-Campos Deportivos Abiertos;11,0198650;-74,8472670;39
-Edificio de Ingenierías - Bloque K;11,0202340;-74,8511560;40
-Instituto de Idiomas - Bloque I;11,0194650;-74,8506840;41
-Coliseo Cultural y Deportivo Los Fundadores;11,0204084;-74,8502915;42
-La Esquina;11,0194220;-74,8504760;43
+﻿location,latitud,longitud,id
+Edificio Mario Santo Domingo ,11.0209010,-74.8512500,1
+Zona de Estudiantes 2,11.0206541,-74.8531796,2
+Puerta 11,11.0210230,-74.8525040,3
+Zona de Estudiantes 1,11.0186906,-74.8514316,4
+Bloque L - Edificio Julio Muvdi,11.0192460,-74.8514620,5
+Bloque C,11.0189840,-74.8509760,6
+Bloque J,11.0189100,-74.8516660,7
+Bloque B,11.0187340,-74.8509390,8
+Edificio de Ciencias de la Salud,11.0188950,-74.8519050,9
+Bloque A,11.0184380,-74.8510000,10
+Edificio Administrativo II,11.0185690,-74.8519450,11
+Laboratorio 5,11.0181320,-74.8519970,12
+Puerta 1,11.0176280,-74.8517760,13
+Edificio Administrativo I,11.0181180,-74.8511110,14
+Puerta 2,11.0174970,-74.8512080,15
+Laboratorio 1,11.0184290,-74.8507730,16
+Laboratorio 2,11.0186530,-74.8506050,17
+Laboratorio 3,11.0189140,-74.8503960,18
+Puerta 4,11.0173160,-74.8505810,19
+Casa de Estudio Alfredo Correa De Andreis,11.0176460,-74.8504350,20
+Biblioteca Karl C. Parrish Jr.,11.0176460,-74.8515408,21
+Bloque D,11.0182190,-74.8502450,22
+Bloque E,11.0184980,-74.8501750,23
+Bloque F,11.0187350,-74.8500570,24
+Du Nord Plaza,11.0187350,-74.8511513,25
+Du Nord Exprès,11.0191540,-74.8505230,26
+Puerta 7,11.0191520,-74.8496080,27
+Café du Nord,11.0194867,-74.8502795,28
+Puerta 9,11.0196220,-74.8487400,29
+Bloque M,11.0196720,-74.8482250,30
+Puerta 10              ,11.0190620,-74.8453850,31
+Laboratorio Aula Viva,11.0199150,-74.8465330,32
+Laboratorio de Arquitectura Tropical,11.0201680,-74.8464660,33
+Oficina Univoluntarios,11.0196600,-74.8465550,34
+Consejería Estudiantil - ACES,11.0196600,-74.8465550,35
+Laboratorio de Energías Renovables,11.0200520,-74.8463730,36
+Laboratorio de Petrografía,11.0199490,-74.8463110,37
+Bloque G,11.0195600,-74.8496330,38
+Campos Deportivos Abiertos,11.0198650,-74.8472670,39
+Edificio de Ingenierías - Bloque K,11.0202340,-74.8511560,40
+Instituto de Idiomas - Bloque I,11.0194650,-74.8506840,41
+Coliseo Cultural y Deportivo Los Fundadores,11.0204084,-74.8502915,42
+La Esquina,11.0194220,-74.8504760,43
