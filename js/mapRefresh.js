@@ -14,13 +14,15 @@ for (var i = numCategories - 1; i >= 0; i--) {
 	categoriesIndex[i] = 0;
 };
 
+setCategories();
+
 //Abre o minimiza el menú desplegable con las caraterísticas disponinbles
 function uiControl(){
 	selectedCategory = false;
 	if(trigger == 0){
 		trigger = 1;
 		var top = 30*(1+numCategories);
-		$('nav').css({"background-color":"#820000","height":"100%","left":"-150px","width":"50vh", "max-width" : "500px"});
+		$('nav').css({"background-color":"#820000","height":"100%","left":"-150px","width":"50vw", "max-width" : "500px"});
 		$('nav>ul>li').css({"background-color" : "rgba(59,46,46,1)", "position" : "relative"});
 		$('nav ul ul li').css({"display":"block"});
 		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0.6)","display":"block", "transition": ".5s all"});
@@ -77,7 +79,7 @@ function setSublocationsCategories(categorySublocations){
 
 	categoriesList.html('');
 	categorySublocations.forEach( sublocation => {
-		categoriesList.append(`<li class="fadeInLeft"> ${sublocation.sublocation} </li> `);
+		categoriesList.append(`<li class="fadeInLeft" onclick="triggerSublocationClick(${sublocation.id})"> ${sublocation.sublocation} </li> `);
 		}
 	);
 }
@@ -95,11 +97,19 @@ function setCategories(){
 
 	categoriesList.html('');
 	categories.forEach( category => {
-		categoriesList.append(`<li data-category-id="${category.id}"> ${category.category} </li>`);
-		console.log(category)
+		if(category.id === lastCategorySelected.id){
+			categoriesList.append(`<li class="category-item" data-category-id="${category.id}" style="background-color: #720000"> ${category.category} </li>`);
+		}else{
+			categoriesList.append(`<li class="category-item" data-category-id="${category.id}"> ${category.category} </li>`);
+		}
 	});
 
 	categoriesTitle.html(`Categorías <span class="open-categories"><i class="fa fa-plus"></i></span>`);
+}
+
+function triggerSublocationClick(sublocationId){
+	$($(`div[title|='${sublocationId}']`)[0]).trigger( "click" );
+	uiControl();
 }
 
 $(window).resize(function() {
@@ -119,29 +129,20 @@ $('#mapOverlay').click(function(){
 });
 
 //Rutina que controla el comportamiento del mapa al seleccionar o deseleccionar una categoría.
-$('nav ul ul').on("click", "li", function(event){
+$('nav ul ul').on("click", "li.category-item", function(event){
 	const CATEGORY_ID = $(event.currentTarget).data('category-id');
 	let category = categories.find( category => category.id === CATEGORY_ID);
 	clearMap();
 
+	//Shows button back, sublocations list and title based on the selected category
 	let categorySublocations = sublocations.filter( sublocation =>  sublocation.category_id ===  CATEGORY_ID);
 	setSublocationsCategories(categorySublocations);
 	setCategoriesTitle(category);
 	selectedCategory = true;
 	
-	if( category.id != lastCategorySelected.id ){
-		lastCategorySelected = category;
-		$(event.currentTarget).css("background-color","#720000");
-		showMarkers(map, CATEGORY_ID, true);
-	} else {
-		lastCategorySelected = {id: -1};
-		$(event.currentTarget).css("background-color","#980000");
-		showMarkers(map, CATEGORY_ID, false);
-	}
-
-	// setTimeout(function() {
-	// 	uiControl();
-	// }, 100);
+	//Shows markers and saves last selected category
+	lastCategorySelected = category;
+	showMarkers(map, CATEGORY_ID, true);
 });
 
 $('#clearMap').click(function(){

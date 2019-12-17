@@ -147,22 +147,6 @@ var myVar;
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    //Define los límites de la imagen a superponer sobre el layout de google maps.
-    // bound1 = new google.maps.LatLng(11.016813, -74.853152);
-    // bound2 = new google.maps.LatLng(11.021414, -74.844984);
-    // var x1 = new google.maps.LatLng(11.016813, -74.853202);
-    // var x2 = new google.maps.LatLng(11.021454, -74.844784);
-    // var limites_imagen = new google.maps.LatLngBounds(bound1, bound2);
-    // var imagen = new google.maps.GroundOverlay("img/Mapa_Uninorte_Uninorte.CO.png", limites_imagen,{opacity:0.3});
-    //Se superpone la imagen en el mapa.
-    // //imagen.setMap(map);
-    // bound2 = new google.maps.LatLng(11.016753, -74.853192);
-    // bound3 = new google.maps.LatLng(11.021834, -74.844984);
-    // var limites_imagen = new google.maps.LatLngBounds(bound2, bound3);
-    // var imagen = new google.maps.GroundOverlay("img/mapa_uninorte.png", limites_imagen,{opacity:0.3});
-    // //Se superpone la imagen en el mapa.
-    // imagen.setMap(map);
-
     bound2 = new google.maps.LatLng(11.016700, -74.853140); //Bottom left
     bound3 = new google.maps.LatLng(11.025050, -74.844680); //Top right
 
@@ -226,6 +210,7 @@ var myVar;
         let marker = new google.maps.Marker({
           position: new google.maps.LatLng(sublocation.latitud, sublocation.longitud),
           icon: 'img/tipologies_over/' + iconStr,
+          title: sublocation.id + ''
         });
         
         //Añade tooltip de comentario
@@ -285,6 +270,7 @@ var myVar;
   };
 
   function searchMarkers(map, sublocation_id){
+		clearMap();
     let sublocationIndex = sublocations.findIndex( sublocation => sublocation.id === sublocation_id);
     let marker = createMarkers.markerList[sublocationIndex];
 

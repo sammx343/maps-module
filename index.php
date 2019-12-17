@@ -38,13 +38,6 @@
 		<ul>
 			<li id="categories-title">Categorías <span class="open-categories"><i class="fa fa-plus"></i></span></li>
 				<ul id="categories-list">
-					<?php
-						foreach ($categories as $line) {
-  							?>
-  								<li data-category-id="<?php echo $line['id'];?>"><?php echo $line['category'];?></li>
-  							<?php
-						}
-					?>
 				</ul>
 		</ul>
 	</nav>
