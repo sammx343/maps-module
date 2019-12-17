@@ -8,6 +8,7 @@ var lastCategorySelected = {
 	id : -1
 };
 var selectedCategory = false;
+var hiddenCategoriesList = true;
 
 //Se innicializa el vector de indíces de las categorías existentes.
 for (var i = numCategories - 1; i >= 0; i--) {
@@ -20,15 +21,19 @@ setCategories();
 function uiControl(){
 	selectedCategory = false;
 	if(trigger == 0){
+		hiddenCategoriesList = false;
 		trigger = 1;
 		var top = 30*(1+numCategories);
-		$('nav').css({"background-color":"#820000","height":"100%","left":"-150px","width":"50vw", "max-width" : "500px"});
+		$('nav').css({"background-color":"#820000","height":"100%","left":"-150px","width":"60vw", "max-width" : "500px"});
 		$('nav>ul>li').css({"background-color" : "rgba(59,46,46,1)", "position" : "relative"});
 		$('nav ul ul li').css({"display":"block"});
 		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0.6)","display":"block", "transition": ".5s all"});
+
+		$('nav').addClass('hidden-categories');
 		fadeIn();
 
 	}else{
+		hiddenCategoriesList = true;
 		trigger = 0;
 		if($('header').width() == 200 ){
 			$('nav').css({"width":"100%"});
@@ -119,7 +124,11 @@ $(window).resize(function() {
 });
 
 $('#categories-title').click(function(){
-	if(!selectedCategory){
+	if( !selectedCategory && !hiddenCategoriesList) {
+		return;
+	}else if(selectedCategory && !hiddenCategoriesList){
+		return;
+	} else{
 		uiControl();
 	}
 });
