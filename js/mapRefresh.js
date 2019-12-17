@@ -4,6 +4,10 @@ var map;
 var markers = [];
 var polyline = [];
 var markersTemp = [];
+var lastCategorySelected = {
+	id : -1
+};
+var selectedCategory = false;
 
 //Se innicializa el vector de indíces de las categorías existentes.
 for (var i = numCategories - 1; i >= 0; i--) {
@@ -12,11 +16,12 @@ for (var i = numCategories - 1; i >= 0; i--) {
 
 //Abre o minimiza el menú desplegable con las caraterísticas disponinbles
 function uiControl(){
+	selectedCategory = false;
 	if(trigger == 0){
 		trigger = 1;
 		var top = 30*(1+numCategories);
-		$('nav').css({"background-color":"#820000","height":"100%","left":"-150px","width":"150px"});
-		$('nav>ul>li').css("background-color","rgba(59,46,46,1)");
+		$('nav').css({"background-color":"#820000","height":"100%","left":"-150px","width":"50vh", "max-width" : "500px"});
+		$('nav>ul>li').css({"background-color" : "rgba(59,46,46,1)", "position" : "relative"});
 		$('nav ul ul li').css({"display":"block"});
 		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0.6)","display":"block", "transition": ".5s all"});
 		fadeIn();
@@ -28,8 +33,8 @@ function uiControl(){
 		}else{
 			$('nav').css({"width":"150px"});
 		}
-		$('nav').css({"background-color":"rgba(59,46,46,0.4)","height":"32px"});
-		$('nav>ul>li').css("background-color","rgba(59,46,46,0.4)");
+		$('nav').css({"background-color":"rgba(59,46,46,0.4)","height":"40px"});
+		$('nav>ul>li').css({"background-color" : "rgba(59,46,46,0.4)", "position" : "static"});
 		$('nav ul ul li').css("display","none");
 		$('#map').css("left","0px");
 		$('#mapOverlay').css({"background-color":"rgba(0,0,0,0)","display":"none","left":"0px", "transition": ".5s all"});
@@ -55,43 +60,7 @@ function fadeIn(){
 
 }
 
-$(window).resize(function() {
-        setTimeout(function() {
-              setCenterMap(1,map);
-           }, 50)
-
-});
-
-$('nav>ul>li').click(function(){
-	uiControl();
-});
-
-$('#mapOverlay').click(function(){
-	uiControl();
-});
-
-//Rutina que controla el comportamiento del mapa al seleccionar o deseleccionar una categoría.
-$('nav ul ul li').click(function(event){
-	const CATEGORY_ID = $(event.currentTarget).data('category-id');
-	let category = categories.find( category => category.id === CATEGORY_ID);
-
-	if( !category.showing || category.showing === false ){
-		category.showing = true;
-		$(event.currentTarget).css("background-color","#820000");
-		showMarkers(map, CATEGORY_ID, true);
-
-	} else {
-		category.showing = false;
-		$(event.currentTarget).css("background-color","#980000");
-		showMarkers(map, CATEGORY_ID, false);
-	}
-
-	setTimeout(function() {
-		uiControl();
-	 }, 100)
-});
-
-$('#clearMap').click(function(){
+function clearMap(){
 	createMarkers.markerList.forEach( marker =>  marker.setMap(null));
 	
 	LatLngList = [];
@@ -101,4 +70,80 @@ $('#clearMap').click(function(){
 
 	$('nav ul ul li').css("background-color","#980000");
 	adjustZoom(map);
+}
+
+function setSublocationsCategories(categorySublocations){
+	let categoriesList = $('#categories-list');
+
+	categoriesList.html('');
+	categorySublocations.forEach( sublocation => {
+		categoriesList.append(`<li class="fadeInLeft"> ${sublocation.sublocation} </li> `);
+		}
+	);
+}
+
+function setCategoriesTitle(category){
+	let categoriesTitle = $('#categories-title');
+
+	categoriesTitle.html(`<span class="open-categories back-button" onclick="setCategories()"><i class="fa fa-arrow-left"></i></span><span>${category.category}</span>`);
+	categoriesTitle.addClass('title-added');
+}
+
+function setCategories(){
+	let categoriesList = $('#categories-list');
+	let categoriesTitle = $('#categories-title');
+
+	categoriesList.html('');
+	categories.forEach( category => {
+		categoriesList.append(`<li data-category-id="${category.id}"> ${category.category} </li>`);
+		console.log(category)
+	});
+
+	categoriesTitle.html(`Categorías <span class="open-categories"><i class="fa fa-plus"></i></span>`);
+}
+
+$(window).resize(function() {
+        setTimeout(function() {
+              setCenterMap(1,map);
+           }, 50)
+});
+
+$('#categories-title').click(function(){
+	if(!selectedCategory){
+		uiControl();
+	}
+});
+
+$('#mapOverlay').click(function(){
+	uiControl();
+});
+
+//Rutina que controla el comportamiento del mapa al seleccionar o deseleccionar una categoría.
+$('nav ul ul').on("click", "li", function(event){
+	const CATEGORY_ID = $(event.currentTarget).data('category-id');
+	let category = categories.find( category => category.id === CATEGORY_ID);
+	clearMap();
+
+	let categorySublocations = sublocations.filter( sublocation =>  sublocation.category_id ===  CATEGORY_ID);
+	setSublocationsCategories(categorySublocations);
+	setCategoriesTitle(category);
+	selectedCategory = true;
+	
+	if( category.id != lastCategorySelected.id ){
+		lastCategorySelected = category;
+		$(event.currentTarget).css("background-color","#720000");
+		showMarkers(map, CATEGORY_ID, true);
+	} else {
+		lastCategorySelected = {id: -1};
+		$(event.currentTarget).css("background-color","#980000");
+		showMarkers(map, CATEGORY_ID, false);
+	}
+
+	// setTimeout(function() {
+	// 	uiControl();
+	// }, 100);
+});
+
+$('#clearMap').click(function(){
+	clearMap();
 });

@@ -1,3 +1,8 @@
+:root{
+	--pulse-color: rgba(164, 42, 42, 0.4);
+	--pulse-color-fade: rgba(164, 42, 42, 0);
+}
+
 html{
 	height: 100%;
 }
@@ -19,7 +24,7 @@ header{
 nav{
 	background-color: rgba(59,46,46,0.4);
 	display: inline-block;
-	height: 32px;
+	height: 40px;
 	margin: 0;
 	overflow: scroll;
 	padding: 0;
@@ -38,9 +43,9 @@ nav>ul>li{
 	background-color: rgba(59,46,46,0.4);
 	color: #FFF;
 	display: block;
-	height: 26px;
+	height: 100%;
 	list-style: none;
-	padding: 6px 0 0 0;
+    padding: 10px 30px;
 	text-align: center;
 }
 
@@ -48,18 +53,29 @@ nav ul ul li{
 	background-color: #980000;
 	border-top: 1px solid #820000;
 	color: #ddd;
-	display: none;
+	display: block;
 	font-size: 14px;
 	height: auto;
 	list-style: none;
     padding: 10px;
 	text-align: left;
-    transition: .5s all;
+	transition: .5s all;
+	animation: fadeInLeft .5s;
 }
 
 nav ul ul li:first-child{
 	border-top: 1px solid #a1a1a1;                               
 	padding-top: 5px;
+}
+
+#categories-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#categories-title:not(.title-added){
+	pointer-events: ;
 }
 
 #search{
@@ -203,32 +219,85 @@ nav ul ul li:first-child{
 #selectRoutes{
 	right: 0;
 }
+
+.button-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.fadeInLeft {
+	animation: fadeInLeft .5s;
+}
+
 .markerTitle{
 	text-align: center;
 	font-weight: bold !important;
 }
 
 .markerDescription{
-	padding-top: 5px;
+	padding-top: 10px;
 	width: 100%;
 }
 
+
 div button{
 	background: none;
+	padding: 10px 0;
 	border: 0;
 	color: blue;
 	font-size: 12px;
 	text-decoration: underline;
+}
 
+.button-delete{
+	color: #ff0000;
+    padding-left: 10px;
 }
 
 .open-categories{
-    padding: 1px 5px;
+    display: flex;
+    padding: 3px 5px;
+    margin-left: 5px;
     background: white;
     color: black;
     font-weight: 800;
-    border-radius: 10px;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
 }
+
+.open-categories.back-button{
+    display: block;
+    padding: 4px 6px;
+	margin-left: 0;
+	position: absolute;
+	left: 5px;
+}
+
+@keyframes pulse {
+	0% {
+		-moz-box-shadow: 0 0 0 0 var(--pulse-color);
+		box-shadow: 0 0 0 0 var(--pulse-color);
+	}
+	70% {
+		-moz-box-shadow: 0 0 0 10px var(--pulse-color-fade);
+		box-shadow: 0 0 0 10px var(--pulse-color-fade);
+	}
+	100% {
+		-moz-box-shadow: 0 0 0 0 var(--pulse-color-fade);
+		box-shadow: 0 0 0 0 var(--pulse-color-fade);
+	}
+}
+
+@keyframes fadeInLeft {
+	0% {
+	   opacity: 0;
+	   transform: translateX(-20px);
+	}
+	100% {
+	   opacity: 1;
+	   transform: translateX(0);
+	}
+ }   
 
 @media screen and (max-width: 700px) {
 	header{

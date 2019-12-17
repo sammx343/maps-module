@@ -10,8 +10,10 @@
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
   	<link rel="stylesheet" type="text/css" href="css/mapasStyle.css">
+  	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
   	<title>Mapas</title>
-  	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRj_vnQ_sqHx6C29CxWoa_G5WjQJOAp18" type="text/javascript"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRj_vnQ_sqHx6C29CxWoa_G5WjQJOAp18" type="text/javascript"></script>
+	<!-- <script src="https://kit.fontawesome.com/edb82cf154.js" crossorigin="anonymous"></script> -->
 	<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
@@ -34,8 +36,8 @@
 	?>
 	<nav>
 		<ul>
-			<li>Categorías <span class="open-categories">+</span> </li>
-				<ul>
+			<li id="categories-title">Categorías <span class="open-categories"><i class="fa fa-plus"></i></span></li>
+				<ul id="categories-list">
 					<?php
 						foreach ($categories as $line) {
   							?>

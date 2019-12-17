@@ -222,7 +222,6 @@ var myVar;
   function createMarkers(){
     if ( !createMarkers.markerList ){
       createMarkers.markerList = sublocations.map( (sublocation, index) => {
-
         let iconStr = "red-dot.png";
         let marker = new google.maps.Marker({
           position: new google.maps.LatLng(sublocation.latitud, sublocation.longitud),
@@ -235,8 +234,10 @@ var myVar;
                           "<div class='markerInfo'>" +
                             "<div class='markerDescription'>"+sublocation.location+"</div>" +
                           "</div>" +
-                          "<button class='botonRoutes' onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
-                          "<button class='botonRoutes' onclick='removeMarker("+ index +")' >Borrar</button>" +
+                          "<div class='button-container'>"+
+                            "<button onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
+                            "<button class='button-delete' onclick='removeMarker("+ index +")' >Borrar</button>" +
+                          "</div>" +
                         "</div></br>");
   
         infoWindow = new google.maps.InfoWindow({
@@ -254,10 +255,8 @@ var myVar;
   }
 
   function showMarkers(map, category_id, shouldShowMarker){
-
     sublocations.forEach( (sublocation, index) => {
       if(sublocation.category_id === category_id){
-
         let marker = createMarkers.markerList[index];
 
         if(shouldShowMarker){
@@ -265,7 +264,6 @@ var myVar;
           LatLngList.push(marker.getPosition());
         }else{
           marker.setMap(null);
-
           //Borra la longitud y latitud de la lista
           LatLngList.splice(LatLngList.indexOf(marker.getPosition()),1);
         }
@@ -274,7 +272,6 @@ var myVar;
 
     adjustZoom(map);
   }
-
 
   function removeMarker(sublocationIndex){
     let marker = createMarkers.markerList[sublocationIndex];
