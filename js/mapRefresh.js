@@ -89,32 +89,12 @@ $('nav ul ul li').click(function(event){
 	setTimeout(function() {
 		uiControl();
 	 }, 100)
-
-	return;
-	//Sombrea la categoría seleccionada y actualiza el vector de índices.
-	if(categoriesIndex[index] === 0){
-		categoriesIndex[index] = 1;
-		//Actualiza el mapa.
-		showMarkers(map,index);
-	//Quita la sección de la categoría.
-	}else{
-		$(this).css("background-color","#980000");
-		categoriesIndex[index] = 0;
-		showMarkers(map,index);
-	}
-	setTimeout(function() {
-              uiControl();
-           }, 100)
 });
 
 $('#clearMap').click(function(){
-	for (var i = 0; i < markers.length; i++) {
-		markers[i].setMap(null);
-	}
+	createMarkers.markerList.forEach( marker =>  marker.setMap(null));
+	
 	LatLngList = [];
-	for (var i = numCategories - 1; i >= 0; i--) {
-		categoriesIndex[i] = 0;
-	};
 	for(var i = 0; i< polyline.length; i++){
 		 polyline[i].setMap(null);
 	}

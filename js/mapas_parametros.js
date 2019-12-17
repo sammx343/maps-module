@@ -110,8 +110,6 @@ var myVar;
 
   function adjustZoom(map){
     //Adjusta el zoom de acuerdo a los marcadores visibles
-
-
     if(LatLngList.length > 1){
       var bounds = new google.maps.LatLngBounds();
       LatLngList.forEach(function(n){

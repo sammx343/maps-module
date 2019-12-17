@@ -18,13 +18,13 @@ $categoriesJson = json_encode(array("result"=>$categories), JSON_UNESCAPED_UNICO
 function getSublocations($conexion){
     $subLocations = array();
 
-    $selectSubLocations = mysqli_prepare($conexion, "SELECT sublocation, longitud, latitud, location, category, category_id FROM location, sublocation, categories WHERE sublocation.location_id = location.id AND sublocation.category_id = categories.id");
+    $selectSubLocations = mysqli_prepare($conexion, "SELECT sublocation, sublocation.id, longitud, latitud, location, category, category_id FROM location, sublocation, categories WHERE sublocation.location_id = location.id AND sublocation.category_id = categories.id");
     mysqli_stmt_execute($selectSubLocations);
     mysqli_stmt_store_result($selectSubLocations);
-    mysqli_stmt_bind_result($selectSubLocations, $sublocation, $longitud, $latitud, $location, $category, $category_id);
+    mysqli_stmt_bind_result($selectSubLocations, $sublocation, $id, $longitud, $latitud, $location, $category, $category_id);
 
     while (mysqli_stmt_fetch($selectSubLocations)) {
-        $subLocations[] = array('sublocation'=>$sublocation,'longitud'=>$longitud,'latitud'=>$latitud,'location'=>$location,'category'=>$category,'category_id'=>$category_id);
+        $subLocations[] = array('sublocation'=>$sublocation,'id'=>$id,'longitud'=>$longitud,'latitud'=>$latitud,'location'=>$location,'category'=>$category,'category_id'=>$category_id);
     }
 
     return $subLocations;

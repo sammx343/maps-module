@@ -222,8 +222,8 @@ var myVar;
   function createMarkers(){
     if ( !createMarkers.markerList ){
       createMarkers.markerList = sublocations.map( (sublocation, index) => {
+
         let iconStr = "red-dot.png";
-  
         let marker = new google.maps.Marker({
           position: new google.maps.LatLng(sublocation.latitud, sublocation.longitud),
           icon: 'img/tipologies_over/' + iconStr,
@@ -231,11 +231,12 @@ var myVar;
         
         //Añade tooltip de comentario
         var content = $("<div class='markerInfoWin'> " +
-                        "<div class='markerTitle'>"+sublocation.sublocation+"</div> " +
-                        "<div class='markerInfo'>" +
-                          "<div class='markerDescription'>"+sublocation.location+"</div>" +
-                        "</div>" +
-                        "<button class='botonRoutes' onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
+                          "<div class='markerTitle'>"+sublocation.sublocation+"</div> " +
+                          "<div class='markerInfo'>" +
+                            "<div class='markerDescription'>"+sublocation.location+"</div>" +
+                          "</div>" +
+                          "<button class='botonRoutes' onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
+                          "<button class='botonRoutes' onclick='removeMarker("+ index +")' >Borrar</button>" +
                         "</div></br>");
   
         infoWindow = new google.maps.InfoWindow({
@@ -243,7 +244,7 @@ var myVar;
           maxWidth: 200
         });
 
-        //Bind de información del sitio
+        //Bind de información del lugar
         bindInfoWindow(marker, map, content[0]);
         return marker;
       });
@@ -256,6 +257,7 @@ var myVar;
 
     sublocations.forEach( (sublocation, index) => {
       if(sublocation.category_id === category_id){
+
         let marker = createMarkers.markerList[index];
 
         if(shouldShowMarker){
@@ -263,77 +265,58 @@ var myVar;
           LatLngList.push(marker.getPosition());
         }else{
           marker.setMap(null);
+
+          //Borra la longitud y latitud de la lista
           LatLngList.splice(LatLngList.indexOf(marker.getPosition()),1);
         }
       }
     });
 
     adjustZoom(map);
-    return;
-
-    //Rutina que dibuja los markers y añade su información respectiva.
-    for (var i = markers.length -1; i>=0; i--) {
-      if(matrixMarkers[i][3] == index){
-        if(categoriesIndex[index] === 1){
-          //Dibuja el marker sobre el mapa.
-          markers[i].setMap(map);
-          LatLngList.push(markers[i].getPosition());
-        }else{
-          markers[i].setMap(null);
-          if((LatLngList.indexOf(markers[i].getPosition()),1) != -1){
-            LatLngList.splice(LatLngList.indexOf(markers[i].getPosition()),1);
-          }
-        }
-      }
-    };
-
-    adjustZoom(map);
   }
 
 
-  function removeMarker(i){
-    //elimina el marker seleccionado
-    if(markers[i].getMap() === map){
-      markers[i].setMap(null);
-      if(LatLngList.indexOf(markers[i].getPosition()),1 != -1){
-        LatLngList.splice(LatLngList.indexOf(markers[i].getPosition()),1);
-        adjustZoom(map);
-      }
+  function removeMarker(sublocationIndex){
+    let marker = createMarkers.markerList[sublocationIndex];
+
+    if(marker.getMap()){
+      marker.setMap(null);
+      
+      //Borra la longitud y latitud de la lista
+      LatLngList.splice(LatLngList.indexOf(marker.getPosition()),1);
     }
   };
 
-  function searchMarkers(map,name){
-    console.log(map);
-    console.log(name);
-    //Muestra los marcadores escogidos a travez del buscador
-    for (var i = 0; i < name.length; i++) {
-      j = markersList.indexOf(name[i]);
-      if(markers[j].getMap() == null){
-        markers[j].setMap(map);
-        LatLngList.push(markers[j].getPosition());
-        adjustZoom(map);
-      }
-    };
+  function searchMarkers(map, sublocation_id){
+    let sublocationIndex = sublocations.findIndex( sublocation => sublocation.id === sublocation_id);
+    let marker = createMarkers.markerList[sublocationIndex];
+
+    if(marker.getMap() == null){
+      marker.setMap(map);
+      LatLngList.push(marker.getPosition());
+      adjustZoom(map);
+    }
   }
 
   function adjustZoom(map){
     //Adjusta el zoom de acuerdo a los marcadores visibles
-    LatLngList.push(currentPosition);
-    infoWindow.close();
-    if(LatLngList.length > 1){
-      var bounds = new google.maps.LatLngBounds();
-      LatLngList.forEach(function(n){
-        bounds.extend(n);
-      });
-      map.fitBounds(bounds);
-      if(map.getZoom()>19){
-        map.setZoom(19);
+    if(currentPosition){
+      LatLngList.push(currentPosition);
+      infoWindow.close();
+      if(LatLngList.length > 1){
+        var bounds = new google.maps.LatLngBounds();
+        LatLngList.forEach(function(n){
+          bounds.extend(n);
+        });
+        map.fitBounds(bounds);
+        if(map.getZoom()>19){
+          map.setZoom(19);
+        }
+      }else{
+        setCenterMap(1,map);
       }
-    }else{
-      setCenterMap(1,map);
+      LatLngList.splice(LatLngList.length-1);
     }
-    LatLngList.splice(LatLngList.length-1);
-
   }
 
   function bindInfoWindow(marker, map, html) {

@@ -1,11 +1,11 @@
+let sublocationsFormat = sublocations.map( sublocation => ({ label: sublocation.sublocation, value : sublocation.id}) );
+
 //autocomplete para el cambo de busqueda
 $('#search input').autocomplete({
-	source: markersList,
+	source: sublocationsFormat,
 	select: function (e, ui) {
-		console.log('clicks here');
-		var name = new Array(); 
-		name.push(ui.item.value);
-		searchMarkers(map,name);
+		const SUBLOCATION_ID = ui.item.value;
+		searchMarkers(map, SUBLOCATION_ID);
 		clearInput();
 		$('#hideKeyboard').focus();
     },
