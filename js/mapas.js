@@ -269,9 +269,9 @@ var myVar;
     }
   };
 
-  function searchMarkers(map, sublocation_id){
+  function searchMarkers(map, sublocationId){
 		clearMap();
-    let sublocationIndex = sublocations.findIndex( sublocation => sublocation.id === sublocation_id);
+    let sublocationIndex = sublocations.findIndex( sublocation => sublocation.id === sublocationId);
     let marker = createMarkers.markerList[sublocationIndex];
 
     if(marker.getMap() == null){
@@ -279,6 +279,10 @@ var myVar;
       LatLngList.push(marker.getPosition());
       adjustZoom(map);
     }
+
+    setTimeout(() => {
+      $($(`div[title|='${sublocationId}']`)[0]).trigger( "click" );
+    }, 200);
   }
 
   function adjustZoom(map){

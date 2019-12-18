@@ -96,7 +96,10 @@ function setCategoriesTitle(category){
 	categoriesTitle.addClass('title-added');
 }
 
+//Activates when clicked back button
 function setCategories(){
+
+	selectedCategory = false;
 	let categoriesList = $('#categories-list');
 	let categoriesTitle = $('#categories-title');
 
@@ -112,8 +115,30 @@ function setCategories(){
 	categoriesTitle.html(`Categorías <span class="open-categories"><i class="fa fa-plus"></i></span>`);
 }
 
+function showCategoryListSublocations(CATEGORY_ID){
+	let category = categories.find( category => category.id === CATEGORY_ID);
+	clearMap();
+
+	//Shows button back, sublocations list and title based on the selected category
+	let categorySublocations = sublocations.filter( sublocation =>  sublocation.category_id ===  CATEGORY_ID);
+	setSublocationsCategories(categorySublocations);
+	setCategoriesTitle(category);
+	selectedCategory = true;
+	
+	//Shows markers and saves last selected category
+	lastCategorySelected = category;
+	showMarkers(map, CATEGORY_ID, true);
+}
+
 function triggerSublocationClick(sublocationId){
-	$($(`div[title|='${sublocationId}']`)[0]).trigger( "click" );
+	//If a category was searched, pointers are cleared. So this will always show 
+	// showCategoryListSublocations(lastCategorySelected.id);
+	searchMarkers(map, sublocationId);
+
+	setTimeout(() => {
+		$($(`div[title|='${sublocationId}']`)[0]).trigger( "click" );
+	}, 200);
+	
 	uiControl();
 }
 
@@ -140,18 +165,8 @@ $('#mapOverlay').click(function(){
 //Rutina que controla el comportamiento del mapa al seleccionar o deseleccionar una categoría.
 $('nav ul ul').on("click", "li.category-item", function(event){
 	const CATEGORY_ID = $(event.currentTarget).data('category-id');
-	let category = categories.find( category => category.id === CATEGORY_ID);
-	clearMap();
 
-	//Shows button back, sublocations list and title based on the selected category
-	let categorySublocations = sublocations.filter( sublocation =>  sublocation.category_id ===  CATEGORY_ID);
-	setSublocationsCategories(categorySublocations);
-	setCategoriesTitle(category);
-	selectedCategory = true;
-	
-	//Shows markers and saves last selected category
-	lastCategorySelected = category;
-	showMarkers(map, CATEGORY_ID, true);
+	showCategoryListSublocations(CATEGORY_ID);
 });
 
 $('#clearMap').click(function(){
