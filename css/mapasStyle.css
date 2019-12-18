@@ -136,12 +136,24 @@ nav ul ul li:first-child{
 }
 
 #clearMap{
-	bottom: 32px;
-	background-color: rgba(250,250,250,0.5);
-	padding: 5px 5px 5px 5px;
-	position: absolute;
-	right: 0;
-	z-index: 1;
+    top: 42px;
+    right: 5px;
+    padding: 10px;
+    border-radius: 1px;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-weight: 500;
+    position: absolute;
+    z-index: 1;
+    max-height: 40px;
+	box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    font-family: Roboto, Arial, sans-serif;
+}
+
+#clearMap i{
+    color: #980000;
 }
 
 #ui-id-1{

@@ -46,7 +46,7 @@
 	<div id="search"><input type="text" placeholder="Buscar..."><img src="img/finder/search_btn.png" height="32px" width="32px"></div>
 	<div id="loadingWrap"><div id="loading"><p>Calculando. . .</p><img src="img/loading.gif" width="50%"></div></div>
 	<div id="warning">La señal no es confiable</div>
-	<div id="clearMap">Limpiar mapa <img src="img/tipologies_over/close.png" height="16px"><img src="img/tipologies_over/default.png" height="25px"></div>
+	<div id="clearMap"> <span> Limpiar Mapa <i class="fa fa-times"></i></span></div>
 	<?php
 	}
 	?>

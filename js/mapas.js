@@ -126,6 +126,8 @@ var myVar;
       currentLong = p.coords.longitude;
       acc = p.coords.accuracy;
 
+      console.log(currentLat, currentLong);
+
       //currentPosition = new google.maps.LatLng("11.0195582407767","-74.84744489192963");
       deferred2.resolve();
     }
