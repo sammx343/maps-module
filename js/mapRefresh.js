@@ -40,7 +40,7 @@ function uiControl(){
 		}else{
 			$('nav').css({"width":"150px"});
 		}
-		$('nav').css({"background-color":"rgba(59,46,46,0.4)","height":"40px"});
+		$('nav').css({"background-color":"rgba(59,46,46,0.4)","height":"40px", "max-width" : "100%"});
 		$('nav>ul>li').css({"background-color" : "rgba(59,46,46,0.4)", "position" : "static"});
 		$('nav ul ul li').css("display","none");
 		$('#map').css("left","0px");

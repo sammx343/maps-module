@@ -95,7 +95,6 @@ var myVar;
     var promise2 = getCoordinates();
     promise2.then(function(){
       if(acc <= 100){
-
         currentPosition = new google.maps.LatLng(currentLat,currentLong);
         markerHome.setPosition(currentPosition);
         circle.setRadius(acc);
@@ -124,9 +123,8 @@ var myVar;
       //Extrae los valores de latitud y longitud de la ubicación del usuario.
       currentLat = p.coords.latitude;
       currentLong = p.coords.longitude;
-      acc = p.coords.accuracy;
 
-      console.log(currentLat, currentLong);
+      acc = p.coords.accuracy;
 
       //currentPosition = new google.maps.LatLng("11.0195582407767","-74.84744489192963");
       deferred2.resolve();
@@ -149,8 +147,8 @@ var myVar;
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    bound2 = new google.maps.LatLng(11.016700, -74.853140); //Bottom left
-    bound3 = new google.maps.LatLng(11.025050, -74.844680); //Top right
+    bound2 = new google.maps.LatLng(11.01675, -74.853190); //Bottom left
+    bound3 = new google.maps.LatLng(11.025130, -74.844680); //Top right
 
     var limites_imagen2 = new google.maps.LatLngBounds(bound2, bound3);
     var imagen = new google.maps.GroundOverlay("img/map_v2.png", limites_imagen2,{opacity:1});
@@ -342,6 +340,7 @@ var myVar;
       }
       function draw(){
         var deferred2 = $.Deferred();
+        
         start = currentPosition;
         //end = markers[ini].position;
         end = new google.maps.LatLng(matrixMarkers[ini][5],matrixMarkers[ini][6]);
