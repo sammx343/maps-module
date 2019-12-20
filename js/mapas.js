@@ -220,8 +220,8 @@ var myVar;
                             "<div class='markerDescription'>"+sublocation.location+"</div>" +
                           "</div>" +
                           "<div class='button-container'>"+
-                            "<button onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
-                            "<button class='button-delete' onclick='removeMarker("+ index +")' >Borrar</button>" +
+                            // "<button onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
+                            "<button class='button-delete' onclick='removeMarker("+ index +")' style='padding-left: 0'>Borrar Marcador</button>" +
                           "</div>" +
                         "</div></br>");
   
@@ -340,7 +340,7 @@ var myVar;
       }
       function draw(){
         var deferred2 = $.Deferred();
-        
+
         start = currentPosition;
         //end = markers[ini].position;
         end = new google.maps.LatLng(matrixMarkers[ini][5],matrixMarkers[ini][6]);
