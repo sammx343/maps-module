@@ -22,6 +22,8 @@ var counterPolylines = 0;
 let markersCurrentlyShowed = [];
 let categoriesCurrentlyShowed = [];
 
+var globalRoute = {};
+
 <?php
   $array_1 = explode(";", file_get_contents("points_main_1.txt"));
   $array_2 = explode(";", file_get_contents("points_main_2.txt"));
@@ -123,7 +125,7 @@ var myVar;
       //Extrae los valores de latitud y longitud de la ubicación del usuario.
       currentLat = p.coords.latitude;
       currentLong = p.coords.longitude;
-
+       
       acc = p.coords.accuracy;
 
       //currentPosition = new google.maps.LatLng("11.0195582407767","-74.84744489192963");
@@ -176,17 +178,19 @@ var myVar;
     google.maps.event.addListener(map, "click", function(){
       infoWindow.close();
     });
+
     google.maps.event.addListener(imagen, "click", function(){
       infoWindow.close();
     });
+
     setTimeout(function() {
           deferred.resolve();
         }, 500);
+
     return deferred.promise();
   }
 
-
-  function setCenterMap(flagMarker,map){
+  function setCenterMap(flagMarker, map){
     //Funcion que centra el mapa por defecto
     var center = new google.maps.LatLng(11.019304, -74.850773);
     map.setCenter(center);
@@ -220,7 +224,7 @@ var myVar;
                             "<div class='markerDescription'>"+sublocation.location+"</div>" +
                           "</div>" +
                           "<div class='button-container'>"+
-                            // "<button onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
+                            "<button onclick='routeDraw("+ index +")' >LLevame aquí!</button>" +
                             "<button class='button-delete' onclick='removeMarker("+ index +")' style='padding-left: 0'>Borrar Marcador</button>" +
                           "</div>" +
                         "</div></br>");
@@ -240,6 +244,7 @@ var myVar;
   }
 
   function showMarkers(map, category_id, shouldShowMarker){
+    eraseRoutes();
     sublocations.forEach( (sublocation, index) => {
       if(sublocation.category_id === category_id){
         let marker = createMarkers.markerList[index];
@@ -307,7 +312,6 @@ var myVar;
   }
 
   function bindInfoWindow(marker, map, html) {
-
     google.maps.event.addListener(marker, 'click', function() {
         infoWindow.close();
         infoWindow.setContent(html);
@@ -315,7 +319,103 @@ var myVar;
     });
   }
 
+  function createPolylineObject(coordinates){
+    globalRoute = new google.maps.Polyline({
+      path: coordinates,
+      geodesic: true,
+      strokeColor: '#820000',
+      strokeOpacity: 0.8,
+      strokeWeight: 6
+    });
+
+    return globalRoute;
+  }
+
+  function mapBoxCoordinates(destination){ 
+    //Mapbox access token
+    let access_token = 'pk.eyJ1Ijoic2FtbXgzNDMiLCJhIjoiY2s0b2NqZTdyMjFyNjNvcXMzbTlyeXcwcSJ9.joQTa1ilodClArdsyWeqog';
+
+    $.ajax({
+      url: `https://api.mapbox.com/directions/v5/mapbox/walking/;${destination.longitud},${destination.latitud}.json?`,
+      type: "get",
+      data: { 
+        geometries: 'polyline', 
+        alternatives: false, 
+        steps: true,
+        overview: 'full',
+        access_token
+      },
+      success: function(response) {
+        let coordinates = response.routes[0].legs[0].steps;
+
+        coordinates = coordinates.map( coor => {
+          let newCoord = coor.intersections[0].location;
+          return { lat: newCoord[1], lng: newCoord[0]};
+        });
+      
+        createPolylineObject(coordinates).setMap(map);
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+      }
+    });
+  }
+
+  function graphHopperCoordinates(currentPosition, destination){
+    //GraphHopper access token
+    let access_token = '7ee1850a-3ffa-4d42-b2ac-33a585f9125a';
+
+    $.ajax({
+      url: `https://graphhopper.com/api/1/route?point=${currentPosition[1]},${currentPosition[0]}&point=${destination.latitud},${destination.longitud}`,
+      type: "get",
+      data: { 
+        type: 'json',
+        locale: 'es-ES',
+        vehicle: 'foot',
+        key: access_token,
+        turn_costs: false,
+        points_encoded: false
+      },
+      success: function(response) {
+        var coordinates = response.paths[0].points.coordinates;
+      
+        coordinates = coordinates.map( coord => {
+          return { lat: coord[1], lng: coord[0]};
+        });
+
+        createPolylineObject(coordinates).setMap(map);
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+      }
+    });
+  }
+
+  function eraseRoutes(){
+    if(Object.keys(globalRoute).length){
+      globalRoute.setMap(null);
+    }
+  }
+
   function routeDraw(ini){
+    //Closes pointer tooltip to show the route
+    $($('button[title|=Cerrar')[0]).trigger( "click" );
+    
+    let destination = sublocations[ini];
+    let currentPosition = [-74.85057,11.01995];
+    console.log(destination);
+    console.log(currentPosition);
+
+    eraseRoutes();
+    
+    //Draws route with the mapbox api
+    //mapBoxCoordinates();
+   
+    //Draws route with the graphhopper api
+    graphHopperCoordinates(currentPosition, destination);
+
+    return;
+    
     for(var i = 0; i< polyline.length; i++){
       polyline[i].setMap(null);
     }

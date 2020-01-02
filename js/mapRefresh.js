@@ -68,6 +68,7 @@ function fadeIn(){
 }
 
 function clearMap(){
+	eraseRoutes();
 	createMarkers.markerList.forEach( marker =>  marker.setMap(null));
 	
 	LatLngList = [];
@@ -131,10 +132,10 @@ function showCategoryListSublocations(CATEGORY_ID){
 }
 
 function triggerSublocationClick(sublocationId){
-	//If a category was searched, pointers are cleared. So this will always show 
-	// showCategoryListSublocations(lastCategorySelected.id);
+	//If a category was searched, pointers are cleared
 	searchMarkers(map, sublocationId);
 
+	//Searches for pointer with given title and opens it
 	setTimeout(() => {
 		$($(`div[title|='${sublocationId}']`)[0]).trigger( "click" );
 	}, 200);
