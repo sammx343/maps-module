@@ -404,8 +404,6 @@ var myVar;
     
     let destination = sublocations[ini];
     let currentPosition = [-74.85057,11.01995];
-    console.log(destination);
-    console.log(currentPosition);
 
     eraseRoutes();
     
